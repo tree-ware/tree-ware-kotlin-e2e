@@ -9,6 +9,9 @@ allprojects {
     version = "0.2.0.0"
 }
 
+val hikariCpVersion = "5.0.1"
+val ktorVersion = "2.0.2" // TODO(cleanup): these should come from tree-ware-kotlin-server as api() dependencies
+
 plugins {
     kotlin("jvm") version "1.7.0"
     id("idea")
@@ -30,6 +33,11 @@ dependencies {
     implementation(libs.treeWareKotlinServer)
     implementation(libs.treeWareKotlinMysql)
     implementation(libs.treeWareKotlinCore)
+
+    implementation("io.ktor:ktor-server-auth:$ktorVersion")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+
+    implementation("com.zaxxer:HikariCP:$hikariCpVersion")
 
     implementation(kotlin("stdlib"))
 }
