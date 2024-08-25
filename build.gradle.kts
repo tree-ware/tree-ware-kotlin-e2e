@@ -1,0 +1,35 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+// The libraries are currently published to JitPack. JitPack picks up the
+// version from the repo label, resulting in all libraries from the repo
+// having the same version in JitPack. Setting the version for all projects
+// conveys this.
+allprojects {
+    group = "org.tree-ware.tree-ware-kotlin-e2e-shell"
+    version = "0.2.0.0"
+}
+
+plugins {
+    kotlin("jvm") version "1.7.0"
+    id("idea")
+    id("org.tree-ware.core") version "0.1.0.0"
+    id("java-library")
+}
+
+repositories {
+    mavenCentral()
+    maven { url = uri("https://jitpack.io") }
+}
+
+tasks.withType<KotlinCompile> {
+    // Compile for Java 8 (default is Java 6)
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+dependencies {
+    implementation(libs.treeWareKotlinServer)
+    implementation(libs.treeWareKotlinMysql)
+    implementation(libs.treeWareKotlinCore)
+
+    implementation(kotlin("stdlib"))
+}

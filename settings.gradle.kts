@@ -1,0 +1,36 @@
+rootProject.name = "e2e-shell"
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = uri("https://jitpack.io") }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "org.tree-ware.core") {
+                useModule("org.tree-ware.tree-ware-gradle-core-plugin:core-plugin:${requested.version}")
+            }
+        }
+    }
+}
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            val treeWareKotlinCoreVersion = version("treeWareKotlinCoreVersion", "0.2.0.0")
+            library("treeWareKotlinCore", "org.tree-ware.tree-ware-kotlin-core", "core").versionRef(
+                treeWareKotlinCoreVersion
+            )
+
+            val treeWareKotlinMysqlVersion = version("treeWareKotlinMysqlVersion", "0.2.0.0")
+            library("treeWareKotlinMysql", "org.tree-ware.tree-ware-kotlin-mysql", "core").versionRef(
+                treeWareKotlinMysqlVersion
+            )
+
+            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.2.0.0")
+            library("treeWareKotlinServer", "org.tree-ware.tree-ware-kotlin-server", "core").versionRef(
+                treeWareKotlinServerVersion
+            )
+        }
+    }
+}
