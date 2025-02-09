@@ -7,16 +7,19 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import kotlinx.coroutines.runBlocking
 import org.lighthousegames.logging.logging
+import org.treeWare.model.core.EntityFactory
 import org.treeWare.server.ktor.commonModule
 import org.treeWare.server.ktor.treeWareModule
 import javax.sql.DataSource
 
-private const val SERVICE_NAME = "e2e-shell"
-
 private val logger = logging()
 
 fun main() = runBlocking {
+    val metaModelFiles: List<String> = null // TODO(replace): with generated constant for list of meta-model files
+    val rootEntityFactory: EntityFactory = null // TODO(replace): with generated rootEntityFactory function
+
     val config = HoconApplicationConfig(ConfigFactory.load())
+    val serviceName = config.property("service.name").getString()
     val environment = config.property("service.deployment.environment").getString()
     val servicePort = config.property("service.deployment.port").getString().toInt()
     logger.info { "environment: $environment" }
@@ -24,14 +27,14 @@ fun main() = runBlocking {
 
     val mySqlDataSource = getMySqlDataSource(config)
 
-    val treeWareServer = newTreeWareServer(environment, mySqlDataSource)
+    val treeWareServer = newTreeWareServer(environment, metaModelFiles, rootEntityFactory, mySqlDataSource)
 
-    logger.info { "starting service: $SERVICE_NAME" }
+    logger.info { "starting service: $serviceName" }
     embeddedServer(Netty, servicePort) {
         commonModule()
         treeWareModule(treeWareServer)
     }.start(wait = false)
-    logger.info { "exited service: $SERVICE_NAME" }
+    logger.info { "exited service: $serviceName" }
 }
 
 private fun getMySqlDataSource(config: HoconApplicationConfig): DataSource? {

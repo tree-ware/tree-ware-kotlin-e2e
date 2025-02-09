@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 // conveys this.
 allprojects {
     group = "org.tree-ware.tree-ware-kotlin-e2e-shell"
-    version = "0.2.0.0"
+    version = "0.4.0.0"
 }
 
 val hikariCpVersion = "5.0.1"
@@ -15,8 +15,8 @@ val ktorVersion = "2.0.2" // TODO(cleanup): these should come from tree-ware-kot
 plugins {
     kotlin("jvm") version "1.7.0"
     id("idea")
-    id("org.tree-ware.core") version "0.1.0.0"
-    id("java-library")
+    id("org.tree-ware.core") version "0.4.0.0"
+    id("java")
 }
 
 repositories {

@@ -1,17 +1,18 @@
 package server
 
-import org.treeWare.model.core.MainModel
-import org.treeWare.model.core.MutableMainModel
+import org.treeWare.model.core.EntityFactory
+import org.treeWare.model.core.EntityModel
 import org.treeWare.model.operator.*
 import org.treeWare.mySql.operator.get
 import server.custom.customGetRequestValidation
 import javax.sql.DataSource
 
 fun getModel(
-    getRequest: MainModel,
+    getRequest: EntityModel,
     setEntityDelegates: EntityDelegateRegistry<SetEntityDelegate>?,
     getEntityDelegates: EntityDelegateRegistry<GetEntityDelegate>?,
-    mySqlDataSource: DataSource?
+    mySqlDataSource: DataSource?,
+    rootEntityFactory: EntityFactory
 ): Response {
     val customValidationErrors = customGetRequestValidation(getRequest)
     if (!customValidationErrors.isOk()) return customValidationErrors
@@ -19,8 +20,7 @@ fun getModel(
         ErrorCode.SERVER_ERROR,
         listOf(ElementModelError("", "No connection to MySQL"))
     )
-    val getResponse = MutableMainModel(getRequest.mainMeta) // TODO(deepak-nulu): pass & use MutableMainModelFactory
+    val getResponse = rootEntityFactory(null)
     val response = get(getRequest, setEntityDelegates, getEntityDelegates, mySqlDataSource, getResponse)
-    // TODO(deepak-nulu): change get() to return a response model instead of taking in a response model parameter.
     return if (response is Response.Success) Response.Model(getResponse) else response
 }

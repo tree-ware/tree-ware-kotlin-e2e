@@ -1,5 +1,6 @@
 package server
 
+import org.treeWare.model.core.EntityFactory
 import org.treeWare.model.operator.GetOperatorId
 import org.treeWare.model.operator.OperatorEntityDelegateRegistry
 import org.treeWare.model.operator.SetOperatorId
@@ -12,6 +13,8 @@ import javax.sql.DataSource
 
 fun newTreeWareServer(
     environment: String,
+    metaModelFiles: List<String>,
+    rootEntityFactory: EntityFactory,
     mySqlDataSource: DataSource?,
     clock: Clock = Clock.systemUTC()
 ): TreeWareServer {
@@ -20,21 +23,17 @@ fun newTreeWareServer(
     val setEntityDelegates = operatorEntityDelegateRegistry.get(SetOperatorId)
     val getEntityDelegates = operatorEntityDelegateRegistry.get(GetOperatorId)
 
-    // TODO(deepak-nulu): drop META_MODEL_FILES parameter from TreeWareServer() since mutableMainModelFactory is passed
-    //   to it? But will we be able to support an API editor UI without the JSON version of the meta-model?
-    //   If we need the JSON meta-model files, then the tree-ware Gradle plugin must generate a constant that lists
-    //   these files.
     return TreeWareServer(
-        listOf(""), // TODO(replace): with generated constant for list of meta-model files
-        null, // TODO(replace): with generated  MutableMainModelFactory
+        metaModelFiles,
+        rootEntityFactory,
         true,
         listOf(
             MySqlMetaModelMapAuxPlugin(environment),
         ),
         listOf(SetAuxPlugin()),
         { initialize(it, mySqlDataSource, clock) },
-        { principal, mainMeta -> getRbacModel(principal, mainMeta) },
+        { principal, metaModel -> getRbacModel(principal, metaModel) },
         { setModel(it, setEntityDelegates, mySqlDataSource, clock) },
-        { getModel(it, setEntityDelegates, getEntityDelegates, mySqlDataSource) }
+        { getModel(it, setEntityDelegates, getEntityDelegates, mySqlDataSource, rootEntityFactory) }
     )
 }

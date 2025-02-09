@@ -1,6 +1,6 @@
 package server
 
-import org.treeWare.model.core.MutableMainModel
+import org.treeWare.model.core.MutableEntityModel
 import org.treeWare.model.operator.EntityDelegateRegistry
 import org.treeWare.model.operator.Response
 import org.treeWare.model.operator.SetEntityDelegate
@@ -10,7 +10,7 @@ import java.time.Clock
 import javax.sql.DataSource
 
 internal fun setModel(
-    setRequest: MutableMainModel,
+    setRequest: MutableEntityModel,
     entityDelegates: EntityDelegateRegistry<SetEntityDelegate>?,
     mySqlDataSource: DataSource?,
     clock: Clock
