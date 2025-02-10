@@ -32,7 +32,7 @@ fun main() = runBlocking {
     logger.info { "starting service: $serviceName" }
     embeddedServer(Netty, servicePort) {
         commonModule()
-        treeWareModule(treeWareServer)
+        treeWareModule(treeWareServer, null)
     }.start(wait = false)
     logger.info { "exited service: $serviceName" }
 }
