@@ -17,17 +17,17 @@ pluginManagement {
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            val treeWareKotlinCoreVersion = version("treeWareKotlinCoreVersion", "0.4.0.0")
+            val treeWareKotlinCoreVersion = version("treeWareKotlinCoreVersion", "0.5.0.0")
             library("treeWareKotlinCore", "org.tree-ware.tree-ware-kotlin-core", "core").versionRef(
                 treeWareKotlinCoreVersion
             )
 
-            val treeWareKotlinMysqlVersion = version("treeWareKotlinMysqlVersion", "0.4.0.0")
+            val treeWareKotlinMysqlVersion = version("treeWareKotlinMysqlVersion", "0.5.0.0")
             library("treeWareKotlinMysql", "org.tree-ware.tree-ware-kotlin-mysql", "mysql").versionRef(
                 treeWareKotlinMysqlVersion
             )
 
-            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.4.0.0")
+            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.5.0.0")
             library("treeWareKotlinServer", "org.tree-ware", "tree-ware-kotlin-server").versionRef(
                 treeWareKotlinServerVersion
             )
