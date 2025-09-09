@@ -2,10 +2,10 @@
 
 * Add tree-ware meta-model JSON files to `src/main/resources/tree_ware/meta_model/`
   * [You can configure IntelliJ with live-templates][1] to make it easy to specify these meta-model JSON files
-* Run the following Gradle tasks in the `tree-ware` group
-  * `generateDiagrams`
-  * `generateKotlin`
-  * `generateOpenApiSpec`
+* Run the `generate` Gradle task in the `tree-ware` group to generate the following:
+  * A UML diagram of the meta-model
+  * A typesafe Kotlin DSL to create models
+  * An OpenAPI spec
   * The generated files will be in `build/treeWare/`
 * At the start of `main()` in `Main.kt`:
   * Set `metaModelFiles` to the generated list of meta-model files
