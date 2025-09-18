@@ -11,6 +11,6 @@ internal fun getRbacModel(principal: Principal?, metaModel: EntityModel): Entity
     // TODO(replace): with an RBAC model fetched from the DB. Tree-ware will eventually make this easy.
     // Permit all.
     val rbac = MutableEntityModel(metaModel, null)
-    setPermissionsAux(rbac, PermissionsAux(all = PermissionScope.NONE))
+    setPermissionsAux(rbac, PermissionsAux(all = PermissionScope.SUB_TREE))
     return rbac
 }

@@ -31,9 +31,10 @@ fun main() = runBlocking {
 
     logger.info { "starting service: $serviceName" }
     embeddedServer(Netty, servicePort) {
+        installNoAuthentication()
         commonModule()
-        treeWareModule(treeWareServer, null)
-    }.start(wait = false)
+        treeWareModule(treeWareServer, NO_AUTHENTICATION_PROVIDER_NAME)
+    }.start(wait = true)
     logger.info { "exited service: $serviceName" }
 }
 

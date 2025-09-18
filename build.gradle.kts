@@ -10,8 +10,7 @@ allprojects {
 }
 
 val hikariCpVersion = "5.0.1"
-val ktorVersion = "3.1.1" // TODO(cleanup): these should come from tree-ware-kotlin-server as api() dependencies
-val slf4jSimpleVersion = "2.0.17"
+val log4j2Version = "2.19.0"
 
 plugins {
     kotlin("jvm") version "2.1.10"
@@ -30,12 +29,10 @@ dependencies {
     implementation(libs.treeWareKotlinMysql)
     implementation(libs.treeWareKotlinCore)
 
-    implementation("io.ktor:ktor-server-auth:$ktorVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-
     implementation("com.zaxxer:HikariCP:$hikariCpVersion")
 
-    implementation("org.slf4j:slf4j-simple:$slf4jSimpleVersion")
+    implementation("org.apache.logging.log4j:log4j-core:$log4j2Version")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:$log4j2Version")
 
     implementation(kotlin("stdlib"))
 }
