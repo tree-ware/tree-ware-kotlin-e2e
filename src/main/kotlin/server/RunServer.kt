@@ -1,23 +1,19 @@
 package server
 
 import com.typesafe.config.ConfigFactory
-import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import kotlinx.coroutines.runBlocking
+import metaModelFiles
 import org.lighthousegames.logging.logging
-import org.treeWare.model.core.EntityFactory
 import org.treeWare.server.ktor.commonModule
 import org.treeWare.server.ktor.treeWareModule
-import javax.sql.DataSource
+import rootEntityFactory
 
 private val logger = logging()
 
 fun main() = runBlocking {
-    val metaModelFiles: List<String> = null // TODO(replace): with generated constant for list of meta-model files
-    val rootEntityFactory: EntityFactory = null // TODO(replace): with generated rootEntityFactory function
-
     val config = HoconApplicationConfig(ConfigFactory.load())
     val serviceName = config.property("service.name").getString()
     val environment = config.property("service.deployment.environment").getString()
@@ -25,7 +21,7 @@ fun main() = runBlocking {
     logger.info { "environment: $environment" }
     logger.info { "servicePort: $servicePort" }
 
-    val mySqlDataSource = getMySqlDataSource(config)
+    val mySqlDataSource = mySql.getDataSource(config)
 
     val treeWareServer = newTreeWareServer(environment, metaModelFiles, rootEntityFactory, mySqlDataSource)
 
@@ -36,22 +32,4 @@ fun main() = runBlocking {
         treeWareModule(treeWareServer, NO_AUTHENTICATION_PROVIDER_NAME)
     }.start(wait = true)
     logger.info { "exited service: $serviceName" }
-}
-
-private fun getMySqlDataSource(config: HoconApplicationConfig): DataSource? {
-    val mySqlEnabled = config.propertyOrNull("service.mysql.enabled")?.getString().toBoolean()
-    logger.info { "mySqlEnabled: $mySqlEnabled" }
-    if (!mySqlEnabled) return null
-
-    val mySqlUrl = config.property("service.mysql.url").getString()
-    val mySqlUser = config.property("service.mysql.user").getString()
-    val mySqlPassword = config.property("service.mysql.password").getString()
-    logger.info { "mySql: $mySqlUrl" }
-
-    return HikariDataSource().apply {
-        jdbcUrl = mySqlUrl
-        username = mySqlUser
-        password = mySqlPassword
-        isAutoCommit = false
-    }
 }

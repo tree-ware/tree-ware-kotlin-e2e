@@ -22,13 +22,13 @@ dependencyResolutionManagement {
                 treeWareKotlinCoreVersion
             )
 
-            val treeWareKotlinMysqlVersion = version("treeWareKotlinMysqlVersion", "0.5.0.0")
+            val treeWareKotlinMysqlVersion = version("treeWareKotlinMysqlVersion", "0.6.0.0")
             library("treeWareKotlinMysql", "org.tree-ware.tree-ware-kotlin-mysql", "mysql").versionRef(
                 treeWareKotlinMysqlVersion
             )
 
-            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.5.1.0")
-            library("treeWareKotlinServer", "org.tree-ware.tree-ware-kotlin-server", "server").versionRef(
+            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.6.0.0")
+            library("treeWareKotlinServer", "org.tree-ware", "tree-ware-kotlin-server").versionRef(
                 treeWareKotlinServerVersion
             )
         }

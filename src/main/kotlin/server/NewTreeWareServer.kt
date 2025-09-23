@@ -3,6 +3,7 @@ package server
 import org.treeWare.model.core.EntityFactory
 import org.treeWare.model.operator.GetOperatorId
 import org.treeWare.model.operator.OperatorEntityDelegateRegistry
+import org.treeWare.model.operator.Response
 import org.treeWare.model.operator.SetOperatorId
 import org.treeWare.model.operator.set.aux.SetAuxPlugin
 import org.treeWare.mySql.aux.MySqlMetaModelMapAuxPlugin
@@ -12,7 +13,7 @@ import java.time.Clock
 import javax.sql.DataSource
 
 fun newTreeWareServer(
-    environment: String,
+    environment: String, // TODO: add application.conf setting to decide if environment should be used as DB prefix
     metaModelFiles: List<String>,
     rootEntityFactory: EntityFactory,
     mySqlDataSource: DataSource?,
@@ -28,10 +29,10 @@ fun newTreeWareServer(
         rootEntityFactory,
         true,
         listOf(
-            MySqlMetaModelMapAuxPlugin(environment),
+            MySqlMetaModelMapAuxPlugin(),
         ),
         listOf(SetAuxPlugin()),
-        { initialize(it, mySqlDataSource, clock) },
+        { Response.Success },
         { principal, metaModel -> getRbacModel(principal, metaModel) },
         { setModel(it, setEntityDelegates, mySqlDataSource, clock) },
         { getModel(it, setEntityDelegates, getEntityDelegates, mySqlDataSource, rootEntityFactory) }

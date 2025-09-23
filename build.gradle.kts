@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 // conveys this.
 allprojects {
     group = "org.tree-ware.tree-ware-kotlin-e2e-shell"
-    version = "0.5.1.0"
+    version = "0.6.0.0"
 }
 
 val hikariCpVersion = "5.0.1"
@@ -15,13 +15,19 @@ val log4j2Version = "2.19.0"
 plugins {
     kotlin("jvm") version "2.1.10"
     id("idea")
-    id("org.tree-ware.core") version "0.5.1.0"
+    id("org.tree-ware.core") version "0.5.2.0"
     id("java")
 }
 
 repositories {
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
+}
+
+treeWare {
+    metaModelAux {
+        auxClasses.add("org.treeWare.mySql.aux.MySqlMetaModelMapAuxPlugin")
+    }
 }
 
 dependencies {
