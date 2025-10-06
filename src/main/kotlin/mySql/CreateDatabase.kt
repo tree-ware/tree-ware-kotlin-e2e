@@ -2,7 +2,6 @@ package mySql
 
 import com.typesafe.config.ConfigFactory
 import io.ktor.server.config.*
-import metaModel
 import org.lighthousegames.logging.logging
 import org.treeWare.model.operator.OperatorEntityDelegateRegistry
 import org.treeWare.model.operator.SetOperatorId
@@ -12,7 +11,6 @@ import org.treeWare.mySql.operator.GenerateDdlCommandsOperatorId
 import org.treeWare.mySql.operator.createDatabase
 import org.treeWare.mySql.operator.delegate.registerMySqlOperatorEntityDelegates
 import org.treeWare.mySql.operator.set
-import rootEntityFactory
 import java.time.Clock
 import kotlin.system.exitProcess
 
@@ -26,6 +24,12 @@ fun main() {
         exitProcess(1)
     }
 
+    val metaModelInfo = metaModel.getInfo(config)
+    if (metaModelInfo == null) {
+        logger.error { metaModel.INFO_NOT_FOUND_ERROR }
+        exitProcess(2)
+    }
+
     // TODO: add application.conf setting to decide if environment should be used as DB prefix
     val environment = config.property("service.deployment.environment").getString()
 
@@ -33,10 +37,10 @@ fun main() {
     registerMySqlOperatorEntityDelegates(operatorEntityDelegateRegistry)
     val createDatabaseDelegates = operatorEntityDelegateRegistry.get(GenerateDdlCommandsOperatorId)
 
-    createDatabase(metaModel, createDatabaseDelegates, mysqlDataSource)
+    createDatabase(metaModelInfo.metaModel, createDatabaseDelegates, mysqlDataSource)
 
     // Create the root entity in the DB. It is required for creating other entities in the DB.
-    val root = rootEntityFactory(null)
+    val root = metaModelInfo.rootEntityFactory(null)
     setSetAux(root, SetAux.CREATE)
     val setEntityDelegates = operatorEntityDelegateRegistry.get(SetOperatorId)
     set(root, setEntityDelegates, mysqlDataSource, clock = Clock.systemUTC())

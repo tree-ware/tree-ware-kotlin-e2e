@@ -15,13 +15,14 @@ val log4j2Version = "2.19.0"
 plugins {
     kotlin("jvm") version "2.1.10"
     id("idea")
-    id("org.tree-ware.core") version "0.5.2.0"
+    id("org.tree-ware.core") version "0.6.0.0-SNAPSHOT"
     id("java")
 }
 
 repositories {
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
+    mavenLocal()
 }
 
 treeWare {
