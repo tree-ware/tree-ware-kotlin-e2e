@@ -4,7 +4,6 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven { url = uri("https://jitpack.io") }
-        mavenLocal()
     }
     resolutionStrategy {
         eachPlugin {
@@ -18,7 +17,7 @@ pluginManagement {
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            val treeWareKotlinCoreVersion = version("treeWareKotlinCoreVersion", "0.5.1.0-SNAPSHOT")
+            val treeWareKotlinCoreVersion = version("treeWareKotlinCoreVersion", "0.5.1.0")
             library("treeWareKotlinCore", "org.tree-ware.tree-ware-kotlin-core", "core").versionRef(
                 treeWareKotlinCoreVersion
             )
@@ -28,8 +27,8 @@ dependencyResolutionManagement {
                 treeWareKotlinMysqlVersion
             )
 
-            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.6.0.0")
-            library("treeWareKotlinServer", "org.tree-ware", "tree-ware-kotlin-server").versionRef(
+            val treeWareKotlinServerVersion = version("treeWareKotlinServerVersion", "0.6.1.0")
+            library("treeWareKotlinServer", "org.tree-ware.tree-ware-kotlin-server", "server").versionRef(
                 treeWareKotlinServerVersion
             )
         }

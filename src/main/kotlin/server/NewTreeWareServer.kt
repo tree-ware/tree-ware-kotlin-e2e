@@ -1,5 +1,6 @@
 package server
 
+import businessLogic.getBusinessLogicFunctions
 import org.treeWare.model.core.EntityFactory
 import org.treeWare.model.operator.GetOperatorId
 import org.treeWare.model.operator.OperatorEntityDelegateRegistry
@@ -24,6 +25,7 @@ fun newTreeWareServer(
     val setEntityDelegates = operatorEntityDelegateRegistry.get(SetOperatorId)
     val getEntityDelegates = operatorEntityDelegateRegistry.get(GetOperatorId)
 
+    val businessLogicFunctions = getBusinessLogicFunctions()
     return TreeWareServer(
         metaModelFiles,
         rootEntityFactory,
@@ -35,6 +37,7 @@ fun newTreeWareServer(
         { Response.Success },
         { principal, metaModel -> getRbacModel(principal, metaModel) },
         { setModel(it, setEntityDelegates, mySqlDataSource, clock) },
-        { getModel(it, setEntityDelegates, getEntityDelegates, mySqlDataSource, rootEntityFactory) }
+        { getModel(it, setEntityDelegates, getEntityDelegates, mySqlDataSource, rootEntityFactory) },
+        businessLogicFunctions
     )
 }

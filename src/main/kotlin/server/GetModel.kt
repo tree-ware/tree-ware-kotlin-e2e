@@ -4,7 +4,6 @@ import org.treeWare.model.core.EntityFactory
 import org.treeWare.model.core.EntityModel
 import org.treeWare.model.operator.*
 import org.treeWare.mySql.operator.get
-import server.custom.customGetRequestValidation
 import javax.sql.DataSource
 
 fun getModel(
@@ -14,8 +13,6 @@ fun getModel(
     mySqlDataSource: DataSource?,
     rootEntityFactory: EntityFactory
 ): Response {
-    val customValidationErrors = customGetRequestValidation(getRequest)
-    if (!customValidationErrors.isOk()) return customValidationErrors
     if (mySqlDataSource == null) return Response.ErrorList(
         ErrorCode.SERVER_ERROR,
         listOf(ElementModelError("", "No connection to MySQL"))
