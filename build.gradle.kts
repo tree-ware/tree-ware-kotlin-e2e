@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 // having the same version in JitPack. Setting the version for all projects
 // conveys this.
 allprojects {
-    group = "org.tree-ware.tree-ware-kotlin-e2e-shell"
+    group = "org.tree-ware.tree-ware-kotlin-e2e"
     version = "0.6.0.0"
 }
 
