@@ -16,7 +16,7 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs {
-        create("libs") {
+        create("libs", Action {
             val treeWareKotlinCoreVersion = version("treeWareKotlinCoreVersion", "0.5.1.0")
             library("treeWareKotlinCore", "org.tree-ware.tree-ware-kotlin-core", "core").versionRef(
                 treeWareKotlinCoreVersion
@@ -31,6 +31,6 @@ dependencyResolutionManagement {
             library("treeWareKotlinServer", "org.tree-ware", "tree-ware-kotlin-server").versionRef(
                 treeWareKotlinServerVersion
             )
-        }
+        })
     }
 }
