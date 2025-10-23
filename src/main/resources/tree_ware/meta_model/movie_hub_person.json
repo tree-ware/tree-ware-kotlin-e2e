@@ -1,0 +1,140 @@
+{
+  "packages": [
+    {
+      "my_sql_": {
+        "table_prefix": "person"
+      },
+      "name": "org.tree_ware.demo.movie_hub.person",
+      "info": "",
+      "enumerations": [
+        {
+          "name": "relationship",
+          "info": "",
+          "values": [
+            {
+              "name": "unspecified",
+              "number": 0
+            },
+            {
+              "name": "mother",
+              "number": 1
+            },
+            {
+              "name": "father",
+              "number": 2
+            },
+            {
+              "name": "sister",
+              "number": 3
+            },
+            {
+              "name": "brother",
+              "number": 4
+            },
+            {
+              "name": "wife",
+              "number": 5
+            },
+            {
+              "name": "husband",
+              "number": 6
+            },
+            {
+              "name": "aunt",
+              "number": 7
+            },
+            {
+              "name": "uncle",
+              "number": 8
+            },
+            {
+              "name": "cousin",
+              "number": 9
+            }
+          ]
+        }
+      ],
+      "entities": [
+        {
+          "my_sql_": {},
+          "name": "person",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "name",
+              "number": 2,
+              "info": "",
+              "type": "string",
+              "max_size": 128
+            },
+            {
+              "name": "picture",
+              "number": 3,
+              "info": "",
+              "type": "blob",
+              "multiplicity": "optional"
+            },
+            {
+              "name": "birthdate",
+              "number": 4,
+              "info": "",
+              "type": "string",
+              "max_size": 32,
+              "multiplicity": "optional"
+            },
+            {
+              "name": "relations",
+              "number": 5,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "relation",
+                "package": "org.tree_ware.demo.movie_hub.person"
+              },
+              "multiplicity": "set"
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "relation",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "relative",
+              "number": 2,
+              "info": "",
+              "type": "association",
+              "association": {
+                "entity": "person",
+                "package": "org.tree_ware.demo.movie_hub.person"
+              }
+            },
+            {
+              "name": "relationship",
+              "number": 3,
+              "info": "",
+              "type": "enumeration",
+              "enumeration": {
+                "name": "relationship",
+                "package": "org.tree_ware.demo.movie_hub.person"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

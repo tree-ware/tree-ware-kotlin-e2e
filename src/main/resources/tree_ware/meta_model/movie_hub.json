@@ -1,0 +1,54 @@
+{
+  "name": "movie_hub",
+  "package": "org.tree_ware.demo.movie_hub",
+  "version": {
+    "semantic": "1.0.0",
+    "name": "fremont"
+  },
+  "root": {
+    "entity": "root",
+    "package": "org.tree_ware.demo.movie_hub"
+  },
+  "packages": [
+    {
+      "my_sql_": {
+        "table_prefix": "movie_hub"
+      },
+      "name": "org.tree_ware.demo.movie_hub",
+      "info": "",
+      "enumerations": [
+      ],
+      "entities": [
+        {
+          "my_sql_": {},
+          "name": "root",
+          "info": "",
+          "fields": [
+            {
+              "name": "movies",
+              "number": 1,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "movie",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "set"
+            },
+            {
+              "name": "people",
+              "number": 2,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "person",
+                "package": "org.tree_ware.demo.movie_hub.person"
+              },
+              "multiplicity": "set"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

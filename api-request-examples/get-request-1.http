@@ -1,0 +1,28 @@
+### A get-request for getting specific informatioon about movies and people.
+### Note that it is a POST since a body is required for specifying what we want to get.
+POST {{baseUrl}}/tree-ware/api/get/v1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "movies": [
+    {
+      "id": null,
+      "name": null
+    }
+  ],
+  "people": [
+    {
+      "id": null,
+      "name": null,
+      "birthdate": null,
+      "relations": [
+        {
+          "id": null,
+          "relative": null,
+          "relationship": null
+        }
+      ]
+    }
+  ]
+}
