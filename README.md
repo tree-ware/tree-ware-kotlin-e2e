@@ -1,4 +1,4 @@
-# tree-ware-kotlin-e2e-shell
+# tree-ware-kotlin-e2e
 
 * Add tree-ware meta-model JSON files to `src/main/resources/tree_ware/meta_model/`
   * [You can configure IntelliJ with live-templates][1] to make it easy to specify these meta-model JSON files

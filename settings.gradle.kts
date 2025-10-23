@@ -1,4 +1,4 @@
-rootProject.name = "e2e-shell"
+rootProject.name = "e2e"
 
 pluginManagement {
     repositories {
