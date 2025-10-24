@@ -1,0 +1,40 @@
+### A set-request for the following operations:
+### Update the birthdate for an existing person
+### Create a relation from an existing person to a new person
+### Create the new person referenced by the above relation.
+POST {{baseUrl}}/tree-ware/api/set/v1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "people": [
+    {
+      "set_": "update",
+      "id": "ACF64369-1F97-4C7A-83DD-8343044A659A",
+      "birthdate": "June 1, 1937"
+    },
+    {
+      "id": "201F5610-F743-4D15-B4D7-68E436F732D4",
+      "relations__set_": "create",
+      "relations": [
+        {
+          "id": "D2843C1B-BA36-415A-9B55-47988AFAD134",
+          "relative": {
+            "people": [
+              {
+                "id": "03139C22-C355-4D5D-A264-A4CC71F55DB9"
+              }
+            ]
+          },
+          "relationship": "brother"
+        }
+      ]
+    },
+    {
+      "set_": "create",
+      "id": "03139C22-C355-4D5D-A264-A4CC71F55DB9",
+      "name": "David Robbins",
+      "birthdate": "Jan 29, 1955"
+    }
+  ]
+}

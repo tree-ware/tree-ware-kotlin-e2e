@@ -1,0 +1,14 @@
+### A set-request for deleting a person.
+### This request will fail because it attempts to delete a person that is being pointed to by another person.
+POST {{baseUrl}}/tree-ware/api/set/v1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "people": [
+    {
+      "set_": "delete",
+      "id": "03139C22-C355-4D5D-A264-A4CC71F55DB9"
+    }
+  ]
+}
