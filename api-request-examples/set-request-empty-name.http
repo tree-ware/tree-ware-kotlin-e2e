@@ -1,0 +1,15 @@
+### A set-request for creating a person with an empty name.
+POST {{baseUrl}}/tree-ware/api/set/v1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "people__set_": "create",
+  "people": [
+    {
+      "id": "211D87D5-EDF1-493D-A968-C4E9D0D730B6",
+      "name": "",
+      "birthdate": "January 01, 2000"
+    }
+  ]
+}
