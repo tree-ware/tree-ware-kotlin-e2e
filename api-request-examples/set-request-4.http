@@ -1,0 +1,22 @@
+### A set-request for deleting a person.
+POST {{baseUrl}}/tree-ware/api/set/v1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "people": [
+    {
+      "set_": "delete",
+      "id": "03139C22-C355-4D5D-A264-A4CC71F55DB9"
+    },
+    {
+      "id": "201F5610-F743-4D15-B4D7-68E436F732D4",
+      "relations": [
+        {
+          "set_": "delete",
+          "id": "D2843C1B-BA36-415A-9B55-47988AFAD134"
+        }
+      ]
+    }
+  ]
+}

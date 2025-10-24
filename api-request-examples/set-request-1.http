@@ -1,0 +1,20 @@
+### A set-request for creating 2 people.
+POST {{baseUrl}}/tree-ware/api/set/v1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "people__set_": "create",
+  "people": [
+    {
+      "id": "201F5610-F743-4D15-B4D7-68E436F732D4",
+      "name": "Tim Robbins",
+      "birthdate": "Oct 16, 1958"
+    },
+    {
+      "id": "ACF64369-1F97-4C7A-83DD-8343044A659A",
+      "name": "Morgan Freeman",
+      "birthdate": "June 1, 1933"
+    }
+  ]
+}
