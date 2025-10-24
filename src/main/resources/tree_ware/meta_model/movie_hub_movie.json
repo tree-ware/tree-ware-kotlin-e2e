@@ -1,0 +1,337 @@
+{
+  "packages": [
+    {
+      "my_sql_": {
+        "table_prefix": "movie"
+      },
+      "name": "org.tree_ware.demo.movie_hub.movie",
+      "info": "",
+      "enumerations": [
+        {
+          "name": "role",
+          "info": "",
+          "values": [
+            {
+              "name": "unknown",
+              "number": 0
+            },
+            {
+              "name": "director",
+              "number": 1
+            },
+            {
+              "name": "writer",
+              "number": 2
+            },
+            {
+              "name": "producer",
+              "number": 3
+            },
+            {
+              "name": "actor",
+              "number": 4
+            }
+          ]
+        }
+      ],
+      "entities": [
+        {
+          "my_sql_": {},
+          "name": "movie",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "name",
+              "number": 2,
+              "info": "",
+              "type": "string",
+              "max_size": 128
+            },
+            {
+              "name": "videos",
+              "number": 3,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "video",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "set"
+            },
+            {
+              "name": "photos",
+              "number": 4,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "photo",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "set"
+            },
+            {
+              "name": "crew",
+              "number": 5,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "crew_member",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "set"
+            },
+            {
+              "name": "reviews",
+              "number": 6,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "review",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "set"
+            },
+            {
+              "name": "box_office",
+              "number": 7,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "box_office",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "optional"
+            },
+            {
+              "name": "tech_specs",
+              "number": 8,
+              "info": "",
+              "type": "composition",
+              "composition": {
+                "entity": "tech_specs",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "optional"
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "photo",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "title",
+              "number": 2,
+              "info": "",
+              "type": "string",
+              "max_size": 128
+            },
+            {
+              "name": "description",
+              "number": 3,
+              "info": "",
+              "type": "string",
+              "max_size": 2048,
+              "multiplicity": "optional"
+            },
+            {
+              "name": "image",
+              "number": 4,
+              "info": "",
+              "type": "blob"
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "video",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "title",
+              "number": 2,
+              "info": "",
+              "type": "string",
+              "max_size": 128
+            },
+            {
+              "name": "description",
+              "number": 3,
+              "info": "",
+              "type": "string",
+              "max_size": 2048,
+              "multiplicity": "optional"
+            },
+            {
+              "name": "url",
+              "number": 4,
+              "info": "",
+              "type": "string",
+              "max_size": 1024
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "crew_member",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "person",
+              "number": 2,
+              "info": "",
+              "type": "association",
+              "association": {
+                "entity": "person",
+                "package": "org.tree_ware.demo.movie_hub.person"
+              }
+            },
+            {
+              "name": "description",
+              "number": 3,
+              "info": "",
+              "type": "string",
+              "max_size": 2048,
+              "multiplicity": "optional"
+            },
+            {
+              "name": "role",
+              "number": 4,
+              "info": "",
+              "type": "enumeration",
+              "enumeration": {
+                "name": "role",
+                "package": "org.tree_ware.demo.movie_hub.movie"
+              },
+              "multiplicity": "optional"
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "review",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "person",
+              "number": 2,
+              "info": "",
+              "type": "association",
+              "association": {
+                "entity": "person",
+                "package": "org.tree_ware.demo.movie_hub.person"
+              }
+            },
+            {
+              "name": "rating",
+              "number": 3,
+              "info": "",
+              "type": "uint8"
+            },
+            {
+              "name": "review",
+              "number": 4,
+              "info": "",
+              "type": "string",
+              "max_size": 2048,
+              "multiplicity": "optional"
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "box_office",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "budget",
+              "number": 2,
+              "info": "",
+              "type": "uint32",
+              "multiplicity": "optional"
+            },
+            {
+              "name": "opening_weekend",
+              "number": 3,
+              "info": "",
+              "type": "uint32",
+              "multiplicity": "optional"
+            },
+            {
+              "name": "gross",
+              "number": 4,
+              "info": "",
+              "type": "uint32",
+              "multiplicity": "optional"
+            }
+          ]
+        },
+        {
+          "my_sql_": {},
+          "name": "tech_specs",
+          "info": "",
+          "fields": [
+            {
+              "name": "id",
+              "number": 1,
+              "type": "uuid",
+              "is_key": true
+            },
+            {
+              "name": "runtime_minutes",
+              "number": 2,
+              "info": "",
+              "type": "uint16",
+              "multiplicity": "optional"
+            },
+            {
+              "name": "aspect_ratio",
+              "number": 3,
+              "info": "",
+              "type": "string",
+              "max_size": 16,
+              "multiplicity": "optional"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
